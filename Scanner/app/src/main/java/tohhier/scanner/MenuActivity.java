@@ -1,4 +1,4 @@
-package tohhier.com.scanner;
+package tohhier.scanner;
 
 import java.util.Locale;
 
