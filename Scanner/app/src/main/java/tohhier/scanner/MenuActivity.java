@@ -31,6 +31,8 @@ public class MenuActivity extends Activity implements ActionBar.TabListener {
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
 
+    //test
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
