@@ -2,14 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment1">
+    tools:context="tohhier.scanner.Fragment1">
 
-    <com.google.android.gms.plus.PlusOneButton
-        xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"
-        android:id="@+id/plus_one_button"
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Fragment 1" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        plus:size="standard"
-        plus:annotation="inline"/>
+        android:text="BEGIN SCAN"
+        android:id="@+id/button1"
+        android:layout_gravity="center" />
 
 </FrameLayout>
