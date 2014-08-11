@@ -20,10 +20,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v13:19.+'
     compile 'com.android.support:support-v4:19.+'
     compile 'com.google.android.gms:play-services:4.2.42'
+    compile files('src/main/java/tohhier/scanner/ZBarScannerLibrary/libs/zbar.jar')
 }
 repositories {
     mavenCentral()
