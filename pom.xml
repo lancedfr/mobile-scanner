@@ -117,12 +117,12 @@
       <version>3.1.0</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>jsp-api</artifactId>
-      <version>2.1</version>
-      <scope>provided</scope>
-    </dependency>
+    <!-- <dependency> -->
+    <!-- <groupId>javax.servlet.jsp</groupId> -->
+    <!-- <artifactId>jsp-api</artifactId> -->
+    <!-- <version>2.1</version> -->
+    <!-- <scope>provided</scope> -->
+    <!-- </dependency> -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
@@ -140,6 +140,18 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <version>${spring-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+      <version>0.9.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path-assert</artifactId>
+      <version>0.9.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>

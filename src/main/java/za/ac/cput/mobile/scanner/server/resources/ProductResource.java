@@ -21,12 +21,13 @@ import za.ac.cput.mobile.scanner.service.product.ProductService;
 @Controller
 public class ProductResource {
   private static final Logger LOGGER = LoggerFactory.getLogger(ProductResource.class);
-  
+
   @Autowired
   private ProductService productService;
 
+  @ResponseBody
   @RequestMapping(value = ProductRestURIConstants.DUMMY_PRODUCT, method = RequestMethod.GET)
-  public @ResponseBody Product getDummyProduct() {
+  public Product getDummyProduct() {
     LOGGER.info("Start getDummyProduct");
     Product product = new Product();
     product.setId(9999);
@@ -36,27 +37,31 @@ public class ProductResource {
     return product;
   }
 
+  @ResponseBody
   @RequestMapping(value = ProductRestURIConstants.GET_PRODUCT, method = RequestMethod.GET)
-  public @ResponseBody Product getProduct(@PathVariable("id") int productId) {
+  public Product getProduct(@PathVariable("id") int productId) {
     LOGGER.info("Start getProduct. ID=" + productId);
     return productService.getProduct(productId);
   }
 
+  @ResponseBody
   @RequestMapping(value = ProductRestURIConstants.GET_ALL_PRODUCT, method = RequestMethod.GET)
-  public @ResponseBody List<Product> getAllProducts() {
+  public List<Product> getAllProducts() {
     LOGGER.info("Start getAllProducts.");
     return productService.getProducts();
   }
 
+  @ResponseBody
   @RequestMapping(value = ProductRestURIConstants.CREATE_PRODUCT, method = RequestMethod.POST)
-  public @ResponseBody Product createProduct(@RequestBody Product product) {
+  public Product createProduct(@RequestBody Product product) {
     LOGGER.info("Start createProduct.");
     productService.addProduct(product);
     return product;
   }
 
+  @ResponseBody
   @RequestMapping(value = ProductRestURIConstants.DELETE_PRODUCT, method = RequestMethod.DELETE)
-  public @ResponseBody Product deleteProduct(@PathVariable("id") int productId) {
+  public Product deleteProduct(@PathVariable("id") int productId) {
     LOGGER.info("Start deleteProduct.");
     productService.deleteProduct(productId);
     return new Product();
