@@ -10,7 +10,6 @@
 
   <properties>
     <spring-version>4.0.6.RELEASE</spring-version>
-    <tomcat6.version>2.2</tomcat6.version>
   </properties>
 
   <dependencies>
@@ -23,11 +22,25 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <version>${spring-version}</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>commons-logging</artifactId>
+          <groupId>commons-logging</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.5</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
