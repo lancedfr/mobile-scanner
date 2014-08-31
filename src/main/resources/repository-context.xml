@@ -10,10 +10,6 @@
       http://www.springframework.org/schema/tx 
       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-<!--   <context:component-scan base-package="za.ac.cput.mobile.scanner" />  -->
-
-<!--   <tx:annotation-driven /> -->
-
   <context:property-placeholder location="classpath:persistence-mysql.properties" />
 
   <bean id="sessionFactory"
