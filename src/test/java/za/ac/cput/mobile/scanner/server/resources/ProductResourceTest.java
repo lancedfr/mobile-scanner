@@ -26,7 +26,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import za.ac.cput.mobile.scanner.repository.model.Product;
 import za.ac.cput.mobile.scanner.service.product.ProductService;
 
-public class ProductResourceIT {
+public class ProductResourceTest {
 
   public static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
       MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
