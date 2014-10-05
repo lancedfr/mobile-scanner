@@ -16,7 +16,7 @@ import za.ac.cput.mobile.scanner.repository.model.Product;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:repository-context-test.xml")
-public class ProductDaoIT {
+public class ProductDaoImplIT {
 
   @Autowired
   private ProductDao productDao;
