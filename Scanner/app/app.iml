@@ -82,7 +82,6 @@
     <orderEntry type="library" exported="" name="core-2.2" level="project" />
     <orderEntry type="library" exported="" name="play-services-4.2.42" level="project" />
     <orderEntry type="library" exported="" name="support-v4-19.1.0" level="project" />
-    <orderEntry type="library" exported="" name="zbar" level="project" />
     <orderEntry type="library" exported="" name="support-v13-19.1.0" level="project" />
     <orderEntry type="library" exported="" name="zxing-android-minimal-1.2.1" level="project" />
   </component>

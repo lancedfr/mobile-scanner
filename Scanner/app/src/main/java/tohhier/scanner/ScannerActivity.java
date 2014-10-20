@@ -1,6 +1,8 @@
 package tohhier.scanner;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import android.content.ActivityNotFoundException;
@@ -26,19 +28,16 @@ public class ScannerActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner); // this works without the scanner app
-      //  IntentIntegrator.setResultDisplayDuration(getIntent(),50000);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //hide action bar
+        final ActionBar actionBar = getActionBar();
+        actionBar.hide();
+        //hide status bar
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        //load scanner
         IntentIntegrator.initiateScan(this);
-
-       // IntentIntegrator integrator = new IntentIntegrator(this);
-       // integrator.initiateScan();
-       /* IntentIntegrator integrator = new IntentIntegrator(ScannerActivity.this);
-        integrator.addExtra("SCAN_WIDTH", 800);
-        integrator.addExtra("SCAN_HEIGHT", 300);
-        integrator.addExtra("RESULT_DISPLAY_DURATION_MS", 3000L);
-        integrator.addExtra("PROMPT_MESSAGE", "Scan Product Barcode");
-
-        integrator.initiateScan(IntentIntegrator.PRODUCT_CODE_TYPES);*/
-
 
     }
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
