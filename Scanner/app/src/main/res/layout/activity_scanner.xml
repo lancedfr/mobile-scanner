@@ -33,7 +33,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Begin Search"
-        android:id="@+id/button"
+        android:id="@+id/buttonSearch"
         android:layout_gravity="center_horizontal" />
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/resultText"
+        android:layout_gravity="center_horizontal"
+        android:textSize="35dp"
+        android:textColor="#ff2124ff" />
 
 </LinearLayout>
