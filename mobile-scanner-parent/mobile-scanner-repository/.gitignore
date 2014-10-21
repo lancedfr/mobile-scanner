@@ -1,0 +1,7 @@
+/.settings/
+/target/
+/.classpath
+/.project
+mobile-scanner-repository.iml
+.idea
+Thumbs.db
