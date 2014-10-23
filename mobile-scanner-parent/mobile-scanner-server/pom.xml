@@ -43,7 +43,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>${spring-version}</version>
       <exclusions>
         <!-- Exclude Commons Logging in favor of SLF4j -->
         <exclusion>
@@ -55,7 +54,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>${spring-version}</version>
     </dependency>
 
     <!-- AspectJ -->
@@ -143,7 +141,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>${spring-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -166,8 +163,7 @@
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>1.9.5</version>
+      <artifactId>mockito-all</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
