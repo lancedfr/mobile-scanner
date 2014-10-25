@@ -9,7 +9,25 @@ package tohhier.scanner;
         import android.util.Log;
         import android.view.View;
         import android.widget.ProgressBar;
+        import android.widget.TextView;
         import android.widget.Toast;
+
+        import org.apache.http.HttpEntity;
+        import org.apache.http.HttpResponse;
+        import org.apache.http.StatusLine;
+        import org.apache.http.client.ClientProtocolException;
+        import org.apache.http.client.HttpClient;
+        import org.apache.http.client.methods.HttpGet;
+        import org.apache.http.impl.client.DefaultHttpClient;
+        import org.apache.http.message.BasicNameValuePair;
+        import org.json.JSONArray;
+        import org.json.JSONObject;
+
+        import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.io.InputStreamReader;
+        import java.io.UnsupportedEncodingException;
 
 
 public class AsyncTimer extends AsyncTask<Void,Integer,Boolean>{
@@ -32,6 +50,7 @@ public class AsyncTimer extends AsyncTask<Void,Integer,Boolean>{
     }
     @Override
     protected Boolean doInBackground(Void... arg0) {
+
         stop  = false;
         isRunning = true;
         seconds = 0;
@@ -40,12 +59,16 @@ public class AsyncTimer extends AsyncTask<Void,Integer,Boolean>{
         {
             try {
                 Thread.sleep(1000);
+
+
+
             } catch (InterruptedException e) {
 
                 Log.e("", e.getMessage());
             }
             seconds++;
             this.publishProgress(seconds);
+
         }
 
         if(stop==false)
@@ -83,6 +106,7 @@ public class AsyncTimer extends AsyncTask<Void,Integer,Boolean>{
     {
         public void progressUpdate(int i);
     }
+
 
 }
 

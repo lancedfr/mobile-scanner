@@ -2,12 +2,27 @@ package tohhier.scanner;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
+import android.app.Activity;
+
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,17 +31,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-
-//import tohhier.scanner.IntentIntegrator;
-//import tohhier.scanner.IntentResult;
 
 public class ScannerActivity extends Activity {
 public String tempBarcode;
 private ProgressBar spinner;
 private AsyncTimer timer;
+private TextView responseText;
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,17 +55,38 @@ private AsyncTimer timer;
 
             public void onClick(View v) {
 
-                //Intent i= new Intent("AnotherActivity");
-                //startActivity(i);
-                TextView result = (TextView) findViewById(R.id.resultText);
+              //  Intent intent = new Intent(getApplication(), MainActivity.class);
+              //  startActivity(intent);
+
+                responseText = (TextView) findViewById(R.id.resultText);
                 if(tempBarcode != null) {
-                    spinner.setVisibility(View.VISIBLE);
-                    startThread();
+
+
+                    // check if you are connected or not
+                    if(isConnected()){
+                      //  tvIsConnected.setBackgroundColor(0xFF00CC00);
+                      //  tvIsConnected.setText("You are conncted");
+                        Toast.makeText(getBaseContext(),"connected",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                       // tvIsConnected.setText("You are NOT conncted");
+                        Toast.makeText(getBaseContext(),"not connected",Toast.LENGTH_LONG).show();
+                    }
+
+                    // call AsynTask to perform network operation on separate thread
+                   responseText.setText(
+                          new HttpAsyncTask().execute("http://41.185.26.97:8080/mobile-scanner-server/rest/products").toString()
+                   );
+
+
+               //  spinner.setVisibility(View.VISIBLE);
+               //  startThread();
+
 
                 }else {
-                    spinner = (ProgressBar)findViewById(R.id.progressBar1);
-                    spinner.setVisibility(View.GONE);
-                    result.setText("No barcode acquired");
+                  //  spinner = (ProgressBar)findViewById(R.id.progressBar1);
+                  //  spinner.setVisibility(View.GONE);
+                    responseText.setText("No barcode acquired");
                 }
             }
 
@@ -111,7 +146,67 @@ private AsyncTimer timer;
         }
         timer.cancel(true);
     }
+    public static String GET(String url){
+        InputStream inputStream = null;
+        String result = "";
+        try {
 
+            // create HttpClient
+            HttpClient httpclient = new DefaultHttpClient();
+
+            // make GET request to the given URL
+            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+
+            // receive response as inputStream
+            inputStream = httpResponse.getEntity().getContent();
+
+            // convert inputstream to string
+            if(inputStream != null) {
+                result = convertInputStreamToString(inputStream);
+            }else
+                result = "Did not work!";
+
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+
+        return result;
+    }
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+
+        inputStream.close();
+        return result;
+
+    }
+
+    public boolean isConnected(){
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+            return false;
+    }
+    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return GET(urls[0]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
+            responseText.setText(result);
+
+        }
+    }
 
 }
 
