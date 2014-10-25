@@ -130,5 +130,19 @@ public class ProductResourceTest {
     verify(productService, times(1)).deleteProduct(1);
     verifyNoMoreInteractions(productService);
   }
+  
+  @Test
+  public void testGetProductByBarcode() throws Exception {
+    when(productService.getProductByBarcode("anyBarcode")).thenReturn(product1);
+
+    mockMvc.perform(get(ProductRestURIConstants.GET_PRODUCT_BY_BARCODE+"?barcode=anyBarcode"))//
+        .andExpect(status().isOk())//
+        .andExpect(content().contentType(APPLICATION_JSON_UTF8))//
+        .andExpect(jsonPath("$.id", is(1)))//
+        .andExpect(jsonPath("$.barcode", is("43214321")));
+
+    verify(productService, times(1)).getProductByBarcode("anyBarcode");
+    verifyNoMoreInteractions(productService);
+  }
 
 }

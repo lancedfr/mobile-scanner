@@ -39,4 +39,9 @@ public class ProductServiceImpl implements ProductService {
     return productDao.getProducts();
   }
 
+  @Override
+  public Product getProductByBarcode(String barcode) {
+    return productDao.getProductByBarcode(barcode);
+  }
+
 }

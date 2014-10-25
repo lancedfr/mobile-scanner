@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,13 @@ public class ProductDaoImpl implements ProductDao {
   }
 
   public void addProduct(Product product) {
-    getCurrentSession().save(product);
+    Product productByBarcode = getProductByBarcode(product.getBarcode());
+    if (productByBarcode == null) {
+      getCurrentSession().save(product);
+    } else {
+      product.setId(productByBarcode.getId());
+      updateProduct(product);
+    }
   }
 
   public void updateProduct(Product product) {
@@ -46,6 +53,12 @@ public class ProductDaoImpl implements ProductDao {
   @SuppressWarnings("unchecked")
   public List<Product> getProducts() {
     return getCurrentSession().createQuery("from Product").list();
+  }
+
+  @Override
+  public Product getProductByBarcode(String barcode) {
+    return (Product) getCurrentSession().createCriteria(Product.class)
+        .add(Restrictions.eq("barcode", barcode)).uniqueResult();
   }
 
 }

@@ -1,6 +1,6 @@
 package za.ac.cput.mobile.scanner.repository;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class ProductDaoImplIT {
   @Before
   public void before() {
     product = new Product();
-    product.setBarcode("1234123123");
+    product.setBarcode("99999");
     product.setName("Lance");
   }
 
@@ -33,7 +33,7 @@ public class ProductDaoImplIT {
   public void testGetProduct() throws Exception {
     productDao.addProduct(product);
     Product getProduct = productDao.getProduct(1);
-    assertEquals("1234123123", getProduct.getBarcode());
+    assertEquals(product.getBarcode(), getProduct.getBarcode());
   }
 
   @Test
@@ -49,12 +49,32 @@ public class ProductDaoImplIT {
   public void testAddProduct() {
     productDao.addProduct(product);
     List<Product> products = productDao.getProducts();
-    assertEquals(2, products.size());
+    assertEquals(1, products.size());
   }
 
   @Test
   public void testDeleteProduct() throws Exception {
     productDao.deleteProduct(1);
+    List<Product> products = productDao.getProducts();
+    assertEquals(0, products.size());
+  }
+  
+  @Test
+  public void testGetProductByBarcode() throws Exception {
+    productDao.addProduct(product);
+    List<Product> products = productDao.getProducts();
+    assertEquals(1, products.size());
+    Product productByBarcode = productDao.getProductByBarcode(product.getBarcode());
+    assertEquals(productByBarcode.getBarcode(), product.getBarcode());
+  }
+  
+  @Test
+  public void testAddSameProduct() throws Exception {
+    productDao.addProduct(product);
+    productDao.addProduct(product);
+    Product productByBarcode = productDao.getProductByBarcode(product.getBarcode());
+    assertEquals(productByBarcode.getBarcode(), product.getBarcode());
+    productDao.addProduct(productByBarcode);
     List<Product> products = productDao.getProducts();
     assertEquals(1, products.size());
   }

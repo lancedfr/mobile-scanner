@@ -15,5 +15,7 @@ public interface ProductService {
   public void deleteProduct(Integer id);
 
   public List<Product> getProducts();
+  
+  public Product getProductByBarcode(String barcode);
 
 }

@@ -67,4 +67,10 @@ public class ProductServiceImplTest {
     verify(productDao, times(1)).updateProduct(product);
   }
 
+  @Test
+  public void testGetProductByBarcode() {
+    when(productDao.getProductByBarcode(anyString())).thenReturn(product);
+    Product getProduct = productService.getProductByBarcode("anybarcode");
+    assertEquals(getProduct, product);
+  }
 }

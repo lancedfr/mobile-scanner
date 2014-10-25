@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import za.ac.cput.mobile.scanner.repository.model.Product;
@@ -65,6 +66,13 @@ public class ProductResource {
     LOGGER.info("Start deleteProduct.");
     productService.deleteProduct(productId);
     return new Product();
+  }
+  
+  @ResponseBody
+  @RequestMapping(value = ProductRestURIConstants.GET_PRODUCT_BY_BARCODE, method = RequestMethod.GET)
+  public Product getProductByBarcode(@RequestParam(value="barcode", required=true) String barcode) {
+    LOGGER.info("Start getProduct. barcode=" + barcode);
+    return productService.getProductByBarcode(barcode);
   }
 
 }

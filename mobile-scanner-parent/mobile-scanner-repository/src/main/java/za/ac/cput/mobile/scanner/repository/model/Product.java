@@ -1,5 +1,6 @@
 package za.ac.cput.mobile.scanner.repository.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ public class Product {
   @Id
   @GeneratedValue
   private Integer id;
+  @Column(unique=true)
   private String barcode;
   private String name;
 
