@@ -20,6 +20,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -121,9 +124,16 @@ private View tempView;
         @Override
         protected void onPostExecute(String result) {
             products = (TextView) tempView.findViewById(R.id.allProducts);
-            products.setText(result);
+            try {
+               
+                products.setText(result);
 
+            } catch (Exception e) {
+                Toast.makeText(getActivity(),"error",Toast.LENGTH_LONG).show();
+            }
         }
     }
+
+
 }
 
