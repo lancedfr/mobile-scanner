@@ -50,6 +50,7 @@ public class NewProductScannerActivity extends Activity {
     private Product product;
     EditText id,name,barcode;
 
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -183,16 +184,18 @@ public class NewProductScannerActivity extends Activity {
         protected String doInBackground(String... urls) {
 
             product = new Product();
-            product.setId(0);
-            product.setBarcode("1234567890");
-            product.setName("Tohhier");
+           // product.setId();
+            product.setBarcode(barcode.getText().toString());
+            product.setName(name.getText().toString());
 
             return POST(urls[0],product);
         }
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
+           // Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
+            responseText.setTextSize(45);
+            responseText.setText("Successful!");
         }
     }
 

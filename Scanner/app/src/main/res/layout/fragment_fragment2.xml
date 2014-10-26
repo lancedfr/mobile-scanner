@@ -19,7 +19,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scan"
+            android:text="Add New Product"
             android:id="@+id/button2" />
 
     </LinearLayout>
