@@ -46,10 +46,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/resultText"
-        android:layout_gravity="center_horizontal"
-        android:textSize="35dp"
-        android:textColor="#ff2124ff" />
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

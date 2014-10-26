@@ -55,7 +55,7 @@ public class AsyncTimer extends AsyncTask<Void,Integer,Boolean>{
         isRunning = true;
         seconds = 0;
         this.publishProgress(seconds);
-        while(seconds<10&&stop!=true)
+        while(seconds<5&&stop!=true)
         {
             try {
                 Thread.sleep(1000);

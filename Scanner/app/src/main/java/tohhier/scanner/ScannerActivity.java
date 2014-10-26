@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.zxing.common.StringUtils;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -64,30 +65,28 @@ private TextView responseText;
 
                     // check if you are connected or not
                     if(isConnected()){
-                      //  tvIsConnected.setBackgroundColor(0xFF00CC00);
-                      //  tvIsConnected.setText("You are conncted");
-                        Toast.makeText(getBaseContext(),"connected",Toast.LENGTH_LONG).show();
+                        responseText.setTextColor(0xFF00CC00);
+                        responseText.setText("Connection to api established....");
+                       // Toast.makeText(getBaseContext(),"connected",Toast.LENGTH_LONG).show();
+                        String text = new HttpAsyncTask().execute("http://41.185.26.97:8080/mobile-scanner-server/rest/product?barcode="+tempBarcode).toString();
+
                     }
                     else{
-                       // tvIsConnected.setText("You are NOT conncted");
-                        Toast.makeText(getBaseContext(),"not connected",Toast.LENGTH_LONG).show();
+                        responseText.setText("No connection established");
+                       // Toast.makeText(getBaseContext(),"not connected",Toast.LENGTH_LONG).show();
                     }
 
-                    // call AsynTask to perform network operation on separate thread
-                   responseText.setText(
-                          new HttpAsyncTask().execute("http://41.185.26.97:8080/mobile-scanner-server/rest/products").toString()
-                   );
-
-
-               //  spinner.setVisibility(View.VISIBLE);
-               //  startThread();
+                 spinner.setVisibility(View.VISIBLE);
+                 startThread();
 
 
                 }else {
-                  //  spinner = (ProgressBar)findViewById(R.id.progressBar1);
-                  //  spinner.setVisibility(View.GONE);
+                    spinner = (ProgressBar)findViewById(R.id.progressBar1);
+                    spinner.setVisibility(View.GONE);
                     responseText.setText("No barcode acquired");
                 }
+
+
             }
 
         };
@@ -202,8 +201,17 @@ private TextView responseText;
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
-            responseText.setText(result);
+           // Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
+
+            if(result.contains("{")) {
+                responseText.setTextSize(45);
+                responseText.setText("Found");
+            }
+            else{
+                responseText.setTextSize(45);
+                responseText.setText("Not Found");
+            }
+           // responseText.setText(result);
 
         }
     }
