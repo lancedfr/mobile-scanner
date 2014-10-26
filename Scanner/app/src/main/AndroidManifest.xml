@@ -31,6 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NewProductScannerActivity"
+            android:label="@string/title_activity_new_product_scanner" >
+        </activity>
     </application>
 
     <!-- To access Google+ APIs: -->
