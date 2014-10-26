@@ -52,7 +52,7 @@ public class ProductDaoImpl implements ProductDao {
 
   @SuppressWarnings("unchecked")
   public List<Product> getProducts() {
-    return getCurrentSession().createQuery("from Product").list();
+    return getCurrentSession().createCriteria(Product.class).list();
   }
 
   @Override
