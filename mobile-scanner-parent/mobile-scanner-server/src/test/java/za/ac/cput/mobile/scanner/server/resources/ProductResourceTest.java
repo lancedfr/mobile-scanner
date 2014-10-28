@@ -65,7 +65,6 @@ public class ProductResourceTest {
     mockMvc.perform(get(ProductRestURIConstants.DUMMY_PRODUCT))//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))//
-        .andExpect(jsonPath("$.id", is(9999)))//
         .andExpect(jsonPath("$.name", is("Dummy")))//
         .andExpect(jsonPath("$.barcode", is("99999999")));
 

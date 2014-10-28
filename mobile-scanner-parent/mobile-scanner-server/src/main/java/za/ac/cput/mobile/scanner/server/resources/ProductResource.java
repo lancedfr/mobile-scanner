@@ -1,5 +1,8 @@
 package za.ac.cput.mobile.scanner.server.resources;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,9 +34,25 @@ public class ProductResource {
   public Product getDummyProduct() {
     LOGGER.info("Start getDummyProduct");
     Product product = new Product();
-    product.setId(9999);
     product.setBarcode("99999999");
+    product.setColour("Blue");
+    product.setCustomerReviewAverage(BigDecimal.valueOf(4.5));
+    product.setCustomerReviewCount(BigInteger.valueOf(397));
+    product.setCustomerTopRated(true);
+    product.setHeight("200cm");
+    product.setLength("160cm");
+    product.setLongDescription("longDescription");
+    product.setManufacturer("South Shoes");
+    product.setModelNumber("M384-e");
     product.setName("Dummy");
+    product.setPreowned(false);
+    product.setPrice(BigDecimal.valueOf(5329.99));
+    product.setReleaseDate(new Date());
+    product.setShortDescription("shortDescription");
+    product.setStateCondition("New");
+    product.setWarranty("2 Year");
+    product.setWeight("600g");
+    product.setWidth("100cm");
     productService.addProduct(product);
     return product;
   }
