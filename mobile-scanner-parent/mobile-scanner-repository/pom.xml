@@ -17,15 +17,15 @@
     <hibernate.version>4.3.6.Final</hibernate.version>
     <mysql.connector.version>5.1.31</mysql.connector.version>
     <spring.version>4.0.6.RELEASE</spring.version>
-    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <jacoco.version>0.6.3.201306030806</jacoco.version>
-    <sonar-jacoco-listeners.version>1.4</sonar-jacoco-listeners.version>
-    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <jacoco.outputDir>${project.build.directory}</jacoco.outputDir>
-    <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file>
-    <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath>
-    <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file>
-    <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath>
+    <!-- <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin> -->
+    <!-- <jacoco.version>0.6.3.201306030806</jacoco.version> -->
+    <!-- <sonar-jacoco-listeners.version>1.4</sonar-jacoco-listeners.version> -->
+    <!-- <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis> -->
+    <!-- <jacoco.outputDir>${project.build.directory}</jacoco.outputDir> -->
+    <!-- <jacoco.out.ut.file>jacoco-ut.exec</jacoco.out.ut.file> -->
+    <!-- <sonar.jacoco.reportPath>${jacoco.outputDir}/${jacoco.out.ut.file}</sonar.jacoco.reportPath> -->
+    <!-- <jacoco.out.it.file>jacoco-it.exec</jacoco.out.it.file> -->
+    <!-- <sonar.jacoco.itReportPath>${jacoco.outputDir}/${jacoco.out.it.file}</sonar.jacoco.itReportPath> -->
   </properties>
 
   <dependencies>
@@ -80,4 +80,35 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/*IT.java</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <id>integration-test</id>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <phase>integration-test</phase>
+            <configuration>
+              <excludes>
+                <exclude>none</exclude>
+              </excludes>
+              <includes>
+                <include>**/*IT.java</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
