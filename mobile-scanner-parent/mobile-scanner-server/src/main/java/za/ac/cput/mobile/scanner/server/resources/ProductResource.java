@@ -41,7 +41,7 @@ public class ProductResource {
     product.setCustomerTopRated(true);
     product.setHeight("200cm");
     product.setLength("160cm");
-    product.setLongDescription("For Kim");
+    product.setLongDescription("longDescription");
     product.setManufacturer("South Shoes");
     product.setModelNumber("M384-e");
     product.setName("Dummy");
