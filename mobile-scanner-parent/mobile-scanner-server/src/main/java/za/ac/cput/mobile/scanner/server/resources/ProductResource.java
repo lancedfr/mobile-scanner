@@ -24,11 +24,19 @@ import za.ac.cput.mobile.scanner.service.product.ProductService;
  */
 @Controller
 public class ProductResource {
+  
+  /** The Constant LOGGER. */
   private static final Logger LOGGER = LoggerFactory.getLogger(ProductResource.class);
 
+  /** The product service. */
   @Autowired
   private ProductService productService;
 
+  /**
+   * Gets a dummy product for testing.
+   *
+   * @return the dummy product
+   */
   @ResponseBody
   @RequestMapping(value = "/rest/product/dummy", method = RequestMethod.GET)
   public Product getDummyProduct() {
@@ -57,6 +65,12 @@ public class ProductResource {
     return product;
   }
 
+  /**
+   * Gets the product.
+   *
+   * @param productId the product id
+   * @return the product
+   */
   @ResponseBody
   @RequestMapping(value = "/rest/product/{id}", method = RequestMethod.GET)
   public Product getProduct(@PathVariable("id") int productId) {
@@ -64,6 +78,11 @@ public class ProductResource {
     return productService.getProduct(productId);
   }
 
+  /**
+   * Gets all the products.
+   *
+   * @return all the products
+   */
   @ResponseBody
   @RequestMapping(value = "/rest/products", method = RequestMethod.GET)
   public List<Product> getAllProducts() {
@@ -71,6 +90,12 @@ public class ProductResource {
     return productService.getProducts();
   }
 
+  /**
+   * Creates the product.
+   *
+   * @param product the product
+   * @return the product
+   */
   @ResponseBody
   @RequestMapping(value = "/rest/product", method = RequestMethod.POST)
   public Product createProduct(@RequestBody Product product) {
@@ -79,6 +104,12 @@ public class ProductResource {
     return product;
   }
 
+  /**
+   * Delete product.
+   *
+   * @param productId the product id
+   * @return the product
+   */
   @ResponseBody
   @RequestMapping(value = "/rest/product/{id}", method = RequestMethod.DELETE)
   public Product deleteProduct(@PathVariable("id") int productId) {
@@ -87,6 +118,12 @@ public class ProductResource {
     return new Product();
   }
   
+  /**
+   * Gets the product by barcode.
+   *
+   * @param barcode the barcode
+   * @return the product by barcode
+   */
   @ResponseBody
   @RequestMapping(value = "/rest/product", method = RequestMethod.GET)
   public Product getProductByBarcode(@RequestParam(value="barcode", required=true) String barcode) {

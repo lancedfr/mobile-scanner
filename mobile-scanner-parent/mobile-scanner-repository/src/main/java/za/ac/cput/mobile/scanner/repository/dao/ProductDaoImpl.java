@@ -11,13 +11,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import za.ac.cput.mobile.scanner.repository.model.Product;
 
+/**
+ * The Class ProductDaoImpl.
+ */
 @Repository
 @Transactional
 public class ProductDaoImpl implements ProductDao {
 
+  /** The session factory. */
   @Autowired
   private SessionFactory sessionFactory;
 
+  /**
+   * Gets the current session.
+   *
+   * @return the current session
+   */
   private Session getCurrentSession() {
     return sessionFactory.getCurrentSession();
   }
@@ -36,7 +45,6 @@ public class ProductDaoImpl implements ProductDao {
     Product productToUpdate = getProduct(product.getId());
     productToUpdate.setName(product.getName());
     getCurrentSession().update(productToUpdate);
-
   }
 
   public Product getProduct(Integer id) {

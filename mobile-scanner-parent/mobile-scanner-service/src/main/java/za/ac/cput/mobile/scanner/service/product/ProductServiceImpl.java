@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 import za.ac.cput.mobile.scanner.repository.dao.ProductDao;
 import za.ac.cput.mobile.scanner.repository.model.Product;
 
+/**
+ * The Class ProductServiceImpl.
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
 
+  /** The product dao. */
   @Autowired
   private ProductDao productDao;
 
