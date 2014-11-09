@@ -30,7 +30,7 @@ public class ProductResource {
   private ProductService productService;
 
   @ResponseBody
-  @RequestMapping(value = ProductRestURIConstants.DUMMY_PRODUCT, method = RequestMethod.GET)
+  @RequestMapping(value = "/rest/product/dummy", method = RequestMethod.GET)
   public Product getDummyProduct() {
     LOGGER.info("Start getDummyProduct");
     Product product = new Product();
@@ -58,21 +58,21 @@ public class ProductResource {
   }
 
   @ResponseBody
-  @RequestMapping(value = ProductRestURIConstants.GET_PRODUCT, method = RequestMethod.GET)
+  @RequestMapping(value = "/rest/product/{id}", method = RequestMethod.GET)
   public Product getProduct(@PathVariable("id") int productId) {
     LOGGER.info("Start getProduct. ID=" + productId);
     return productService.getProduct(productId);
   }
 
   @ResponseBody
-  @RequestMapping(value = ProductRestURIConstants.GET_ALL_PRODUCT, method = RequestMethod.GET)
+  @RequestMapping(value = "/rest/products", method = RequestMethod.GET)
   public List<Product> getAllProducts() {
     LOGGER.info("Start getAllProducts.");
     return productService.getProducts();
   }
 
   @ResponseBody
-  @RequestMapping(value = ProductRestURIConstants.CREATE_PRODUCT, method = RequestMethod.POST)
+  @RequestMapping(value = "/rest/product", method = RequestMethod.POST)
   public Product createProduct(@RequestBody Product product) {
     LOGGER.info("Start createProduct.");
     productService.addProduct(product);
@@ -80,7 +80,7 @@ public class ProductResource {
   }
 
   @ResponseBody
-  @RequestMapping(value = ProductRestURIConstants.DELETE_PRODUCT, method = RequestMethod.DELETE)
+  @RequestMapping(value = "/rest/product/{id}", method = RequestMethod.DELETE)
   public Product deleteProduct(@PathVariable("id") int productId) {
     LOGGER.info("Start deleteProduct.");
     productService.deleteProduct(productId);
@@ -88,7 +88,7 @@ public class ProductResource {
   }
   
   @ResponseBody
-  @RequestMapping(value = ProductRestURIConstants.GET_PRODUCT_BY_BARCODE, method = RequestMethod.GET)
+  @RequestMapping(value = "/rest/product", method = RequestMethod.GET)
   public Product getProductByBarcode(@RequestParam(value="barcode", required=true) String barcode) {
     LOGGER.info("Start getProduct. barcode=" + barcode);
     return productService.getProductByBarcode(barcode);

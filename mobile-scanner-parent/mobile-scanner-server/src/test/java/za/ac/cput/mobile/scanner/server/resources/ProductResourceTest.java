@@ -62,7 +62,7 @@ public class ProductResourceTest {
 
   @Test
   public void testGetDummyProduct() throws Exception {
-    mockMvc.perform(get(ProductRestURIConstants.DUMMY_PRODUCT))//
+    mockMvc.perform(get("/rest/product/dummy"))//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))//
         .andExpect(jsonPath("$.name", is("Dummy")))//
@@ -76,7 +76,7 @@ public class ProductResourceTest {
   public void testGetProduct() throws Exception {
     when(productService.getProduct(1)).thenReturn(product1);
 
-    mockMvc.perform(get(ProductRestURIConstants.GET_PRODUCT.replace("{id}", "1")))//
+    mockMvc.perform(get("/rest/product/{id}".replace("{id}", "1")))//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))//
         .andExpect(jsonPath("$.id", is(1)))//
@@ -90,7 +90,7 @@ public class ProductResourceTest {
   public void testGetAllProducts() throws Exception {
     when(productService.getProducts()).thenReturn(Arrays.asList(product1, product2));
 
-    mockMvc.perform(get(ProductRestURIConstants.GET_ALL_PRODUCT))//
+    mockMvc.perform(get("/rest/products"))//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))//
         .andExpect(jsonPath("$", hasSize(2)))//
@@ -104,7 +104,7 @@ public class ProductResourceTest {
 
   @Test
   public void testCreateProduct() throws Exception {
-    mockMvc.perform(post(ProductRestURIConstants.CREATE_PRODUCT)//
+    mockMvc.perform(post("/rest/product")//
         .contentType(APPLICATION_JSON_UTF8)//
         .content("{\"id\":1,\"name\":\"Lance\",\"barcode\":\"43214321\"}"))//
         .andExpect(status().isOk())//
@@ -118,7 +118,7 @@ public class ProductResourceTest {
 
   @Test
   public void testDeleteProduct() throws Exception {
-    mockMvc.perform(delete(ProductRestURIConstants.DELETE_PRODUCT.replace("{id}", "1"))//
+    mockMvc.perform(delete("/rest/product/1")//
         .contentType(APPLICATION_JSON_UTF8)//
         .content("{\"id\":1,\"name\":\"Lance\",\"barcode\":\"43214321\"}"))//
         .andExpect(status().isOk())//
@@ -134,7 +134,7 @@ public class ProductResourceTest {
   public void testGetProductByBarcode() throws Exception {
     when(productService.getProductByBarcode("anyBarcode")).thenReturn(product1);
 
-    mockMvc.perform(get(ProductRestURIConstants.GET_PRODUCT_BY_BARCODE+"?barcode=anyBarcode"))//
+    mockMvc.perform(get("/rest/product?barcode=anyBarcode"))//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))//
         .andExpect(jsonPath("$.id", is(1)))//
