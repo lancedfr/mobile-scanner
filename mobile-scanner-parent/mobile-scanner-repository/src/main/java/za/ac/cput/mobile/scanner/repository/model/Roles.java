@@ -9,8 +9,8 @@ import javax.persistence.Table;
  * The Class Roles.
  */
 @Entity
-@Table(name = "roles")
-public class role {
+@Table(name = "Roles")
+public class Roles {
 
 	/** The id. */
 	@Id

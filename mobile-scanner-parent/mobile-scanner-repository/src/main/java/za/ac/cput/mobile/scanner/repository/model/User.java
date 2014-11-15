@@ -16,15 +16,17 @@ public class User {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+
+	private String userName;
+
 	private String password;
-	
+
 	private String firstName;
-	
+
 	private String lastName;
-	
+
 	private Integer age;
-	
+
 	private String gender;
 
 	public Integer getId() {
@@ -37,6 +39,14 @@ public class User {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public void setPassword(String password) {
@@ -74,5 +84,5 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
+
 }
