@@ -2,6 +2,7 @@ package za.ac.cput.mobile.scanner.repository.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +41,10 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void deleteUser(Integer id) {
-		// TODO Auto-generated method stub
+		User user = getUser(id);
+		if (user != null) {
+			getCurrentSession().delete(user);
+		}
 
 	}
 
@@ -60,14 +64,13 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUser(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (User) getCurrentSession().get(User.class, id);
 	}
 
 	@Override
 	public User getUserByUserName(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+		return (User) getCurrentSession().createCriteria(User.class)
+				.add(Restrictions.eq("userName", userName)).uniqueResult();
 	}
 
 }
