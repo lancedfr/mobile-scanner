@@ -138,7 +138,7 @@ public class MenuActivity extends Activity implements ActionBar.TabListener {
                     case 1:
                         return new Fragment2();
                     case 2:
-                        return new Fragment3();
+                        return new Fragment4();//Fragment3();
 
                 }
             return PlaceholderFragment.newInstance(position + 1);

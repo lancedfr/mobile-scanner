@@ -1,10 +1,7 @@
 package tohhier.scanner;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
+import android.app.ActionBar;
+import android.app.ListFragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -12,43 +9,42 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import tohhier.scanner.classes.Product;
 
 
-public class Fragment3 extends Fragment {
-private TextView products;
-private View tempView;
-    public static Fragment3 newInstance(String param1, String param2) {
-        Fragment3 fragment = new Fragment3();
-        Bundle args = new Bundle();
+/**
+ * A simple {@link Fragment} subclass.
+ *
+ */
+public class Fragment4 extends Fragment{
 
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public Fragment3() {
-        // Required empty public constructor
-    }
-
+    private TextView products;
+    private View tempView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -58,19 +54,28 @@ private View tempView;
         View decorView = getActivity().getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_fragment3,container, false);
+        View rootView = inflater.inflate(R.layout.fragment_fragment4,container, false);
         tempView = rootView;
+
+        new HttpAsyncTask().execute("http://mobilescanner.co.za/mobile-scanner-server/rest/products");
+
+
+
+
         Button b = (Button)rootView.findViewById(R.id.button10);
         b.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
                 new HttpAsyncTask().execute("http://mobilescanner.co.za/mobile-scanner-server/rest/products");
+
 
             }
 
@@ -129,15 +134,28 @@ private View tempView;
         @Override
         protected void onPostExecute(String result) {
             products = (TextView) tempView.findViewById(R.id.allProducts);
+
+
             try {
-               
-                products.setText(result);
+
+                Gson gson = new Gson();
+                @SuppressWarnings("serial")
+                Type collectionType = new TypeToken<List<Product>>() {
+                }.getType();
+                ArrayList<Product> navigation = gson.fromJson(result, collectionType);
+                String x = "";
+
+                for(int i = 0; i < navigation.size();i++) {
+
+                  x +="Product Id: "+navigation.get(i).getId()+"\n"+"Barcode Number: " + navigation.get(i).getBarcode() + "\n" +"Product Name: "+ navigation.get(i).getName() + "\n_____________________________________\n\n";
+                }
+
+                products.setText(x);
 
             } catch (Exception e) {
-                Toast.makeText(getActivity(),"error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
             }
         }
     }
 
 }
-

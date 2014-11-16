@@ -78,7 +78,7 @@ public class NewProductScannerActivity extends Activity {
                         responseText.setText("Connection to api established....");
                         // Toast.makeText(getBaseContext(),"connected",Toast.LENGTH_LONG).show();
                        // String text = new HttpAsyncTask().execute("http://41.185.26.97:8080/mobile-scanner-server/rest/product?barcode="+tempBarcode).toString();
-                        new HttpAsyncTask().execute("http://41.185.26.97:8080/mobile-scanner-server/rest/product");
+                        new HttpAsyncTask().execute("http://mobilescanner.co.za/mobile-scanner-server/rest/product");
                     }
                     else{
                         responseText.setText("No connection established");

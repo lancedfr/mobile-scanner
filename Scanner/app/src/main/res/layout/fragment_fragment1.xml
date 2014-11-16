@@ -23,7 +23,14 @@
         android:shadowRadius="5"
 
         android:id="@+id/button1"
-        android:layout_gravity="center" />
+        android:layout_gravity="center_horizontal|bottom" />
+
+    <ImageView
+        android:layout_width="256dp"
+        android:layout_height="193dp"
+        android:id="@+id/imageView3"
+        android:layout_gravity="center"
+        android:src="@drawable/dietitianshopper" />
 
 
 </FrameLayout>

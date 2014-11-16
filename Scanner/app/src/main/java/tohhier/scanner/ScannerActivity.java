@@ -68,7 +68,7 @@ private TextView responseText;
                         responseText.setTextColor(0xFF00CC00);
                         responseText.setText("Connection to api established....");
                        // Toast.makeText(getBaseContext(),"connected",Toast.LENGTH_LONG).show();
-                        String text = new HttpAsyncTask().execute("http://41.185.26.97:8080/mobile-scanner-server/rest/product?barcode="+tempBarcode).toString();
+                        String text = new HttpAsyncTask().execute("http://mobilescanner.co.za/mobile-scanner-server/rest/product?barcode="+tempBarcode).toString();
 
                     }
                     else{
