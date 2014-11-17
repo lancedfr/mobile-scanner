@@ -32,7 +32,7 @@ import javax.persistence.Table;
 
 /**
  * The Class Product.
- */
+ */ 
 @Entity
 @Table(name = "product")
 public class Product {
